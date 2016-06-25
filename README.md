@@ -27,12 +27,20 @@ Lightweight library for text typing effect. No dependency.
 
 ```
 <div id="typePad">
-  <p>Looking for new chance?</p>
-  <p class="sentence">Are you experienced developer?</p>
-  <p class="sentence">Are you talented designer?</p>
-  <p class="sentence">Or you are good in solution consulting?</p>
-  <p class="sentence">Are you looking for new challenge?</p>
-  <p class="sentence">Here may be your chance...</p>
+  <p>TypeWritter effect demo.</p>
+  <p class="sentence">One day in spring, a woman came</p>
+  <p class="sentence">In my lonely woods,</p>
+  <p class="sentence">In the lovely form of the Beloved.</p>
+  <p class="sentence">Came, to give to my songs, melodies,</p>
+  <p class="sentence">To give to my dreams, sweetness.</p>
+  <p class="sentence">Suddenly a wild wave</p>
+  <p class="sentence">Broke over my heart's shores</p>
+  <p class="sentence">And drowned all language.</p>
+  <p class="sentence">To my lips no name came,</p>
+  <p class="sentence">She stood beneath the tree, turned,</p>
+  <p class="sentence">Glanced at my face, made sad with pain,</p>
+  <p class="sentence">And with quick steps, came and sat by me.</p>
+  <p class="sentence">"One Day In Spring....", Rabindranath Tagore</p>
 </div>
 ```
 
