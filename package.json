@@ -1,0 +1,34 @@
+{
+  "version": "0.0.1",
+  "name": "typewritter-effect",
+  "description": "Lightweight module for text typing effect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndaidong/typewritter"
+  },
+  "author": "@ndaidong",
+  "main": "./index.js",
+  "engines": {
+    "node": ">= 6.0"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/gccmin src dist"
+  },
+  "devDependencies": {
+    "gcc-min": "latest"
+  },
+  "keywords": [
+    "text",
+    "effect",
+    "animation",
+    "typewritter",
+    "typing"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    "ndaidong <ndaidong@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/ndaidong/typewritter/issues"
+  }
+}
