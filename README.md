@@ -1,6 +1,8 @@
 # typewritter
 Lightweight library for text typing effect. No dependency.
 
+[Demo](http://codepen.io/ndaidong/pen/aZpYmb)
+
 ## Setup
 
 - CDN
@@ -73,7 +75,7 @@ TypeWritter.start({
 
 So we would get something like this demo:
 
-http://codepen.io/ndaidong/full/aZpYmb/
+http://codepen.io/ndaidong/pen/aZpYmb
 
 # License
 
