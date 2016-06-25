@@ -1,5 +1,5 @@
 # typewritter
-Lightweight library for text typing effect. No dependency.
+Text typing effect - like [typed.js](https://github.com/mattboldt/typed.js/), but lightweight, modular and no dependency.
 
 [Demo](http://codepen.io/ndaidong/pen/aZpYmb)
 
