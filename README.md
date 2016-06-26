@@ -7,10 +7,10 @@ Text typing effect - like [typed.js](https://github.com/mattboldt/typed.js/), bu
 
 - CDN
 
-   - [typewritter-effect.min.js](https://cdn.rawgit.com/ndaidong/typewritter/master/dist/typewritter-effect.min.js)
+   - [typewritter-effect.min.js](https://rawgit.com/ndaidong/typewritter/master/dist/typewritter-effect.min.js)
 
   ```
-  <script type="text/javascript" src="https://cdn.rawgit.com/ndaidong/typewritter/master/dist/typewritter-effect.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/ndaidong/typewritter/master/dist/typewritter-effect.min.js"></script>
   ```
 
 - Also supports ES6 Module, AMD and UMD style.
