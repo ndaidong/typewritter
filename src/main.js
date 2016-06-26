@@ -17,114 +17,148 @@
 
   const SENTENCE_DELAY = 3000;
 
-  var sentences = [];
+  class TW {
+    constructor({containerId, extractClass, cursorClass, sentences = []}) {
 
-  var el;
-  var typingTimer;
-  var currLetter = -1;
-  var currSentence = 0;
+      let container = document.getElementById(containerId);
+      if (!container) {
+        throw new Error('containerId does not exist!');
+      }
 
-  var back, next;
+      let ps = container.querySelectorAll(`.${extractClass}`);
+      if (ps.length) {
+        for (var i = 0; i < ps.length; i++) {
+          let p = ps[i];
+          let s = p.textContent;
+          if (s.length > 0) {
+            sentences.push(s);
+          }
+        }
+      }
 
-  back = () => {
-    if (typingTimer) {
-      clearTimeout(typingTimer);
-    }
-    let msg = sentences[currSentence];
-    let k = Math.random() * 20 + 10;
+      if (!sentences.length) {
+        throw new Error('sentences could not be empty!');
+      }
 
-    if (currLetter >= 0) {
-      currLetter--;
-      let s = msg.substring(0, currLetter);
-      el.innerHTML = `<span>${s}</span>`;
-      typingTimer = setTimeout(back, k);
-    } else {
-      currSentence++;
-      typingTimer = setTimeout(next, k);
-    }
-  };
+      container.innerHTML = '';
+      let el = document.createElement('SPAN');
+      container.appendChild(el);
+      let cursor = document.createElement('SPAN');
+      cursor.className = cursorClass;
+      cursor.innerHTML = '|';
+      container.appendChild(cursor);
 
-  next = () => {
+      this.sentences = sentences;
+      this.el = el;
+      this.typingTimer = null;
+      this.currLetter = -1;
+      this.currSentence = 0;
 
-    let sl = sentences.length;
-    if (sl === 0) {
-      return false;
-    }
-
-    if (typingTimer) {
-      clearTimeout(typingTimer);
-    }
-
-    if (currSentence >= sl) {
-      currSentence = 0;
+      return this;
     }
 
-    let msg = sentences[currSentence];
-    let a = msg.split('');
-    let len = a.length;
+    clearBack() {
 
-    if (currLetter < len) {
-      currLetter++;
-      let s = msg.substring(0, currLetter);
-      el.innerHTML = `<span>${s}</span>`;
-      typingTimer = setTimeout(next, Math.random() * 100 + 50);
-    } else {
-      typingTimer = setTimeout(back, SENTENCE_DELAY);
+      let self = this;
+      let sentences = self.sentences;
+      let typingTimer = self.typingTimer;
+      let currLetter = self.currLetter;
+      let currSentence = self.currSentence;
+      let el = self.el;
+
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+      }
+      let msg = sentences[currSentence];
+      let k = Math.random() * 20 + 10;
+
+      if (currLetter >= 0) {
+        currLetter--;
+        let s = msg.substring(0, currLetter);
+        el.innerHTML = s;
+        typingTimer = setTimeout(() => {
+          self.clearBack();
+        }, k);
+      } else {
+        currSentence++;
+        typingTimer = setTimeout(() => {
+          self.writeNext();
+        }, k);
+      }
+
+      this.currLetter = currLetter;
+      this.currSentence = currSentence;
+      this.typingTimer = typingTimer;
+
+      return this;
     }
 
-    return {
-      typingTimer,
-      currLetter,
-      currSentence
-    };
-  };
+    writeNext() {
 
-  var stop = () => {
-    if (typingTimer) {
-      clearTimeout(typingTimer);
+      let self = this;
+      let sentences = self.sentences;
+      let typingTimer = self.typingTimer;
+      let currLetter = self.currLetter;
+      let currSentence = self.currSentence;
+      let el = self.el;
+
+      let sl = sentences.length;
+      if (sl === 0) {
+        return false;
+      }
+
+      if (typingTimer) {
+        clearTimeout(typingTimer);
+      }
+
+      if (currSentence >= sl) {
+        currSentence = 0;
+      }
+
+      let msg = sentences[currSentence];
+      let a = msg.split('');
+      let len = a.length;
+
+      if (currLetter < len) {
+        currLetter++;
+        let s = msg.substring(0, currLetter);
+        el.innerHTML = s;
+        typingTimer = setTimeout(() => {
+          self.writeNext();
+        }, Math.random() * 100 + 50);
+      } else {
+        typingTimer = setTimeout(() => {
+          self.clearBack();
+        }, SENTENCE_DELAY);
+      }
+
+      this.currLetter = currLetter;
+      this.currSentence = currSentence;
+      this.typingTimer = typingTimer;
+
+      return this;
     }
-    currLetter = -1;
-    currSentence = 0;
-    typingTimer = null;
-  };
+
+    stop() {
+      let self = this;
+      if (self.typingTimer) {
+        clearTimeout(self.typingTimer);
+      }
+      this.currLetter = -1;
+      this.currSentence = 0;
+      this.typingTimer = null;
+      return this;
+    }
+  }
 
   var start = ({containerId, extractClass, cursorClass}) => {
 
-    let container = document.getElementById(containerId);
-    if (!container) {
-      return false;
-    }
-
-    let ps = container.querySelectorAll(`.${extractClass}`);
-    if (ps.length) {
-      for (var i = 0; i < ps.length; i++) {
-        let p = ps[i];
-        let s = p.textContent;
-        if (s.length > 0) {
-          sentences.push(s);
-        }
-      }
-    }
-
-    if (!sentences.length) {
-      return false;
-    }
-
-    container.innerHTML = '';
-    el = document.createElement('SPAN');
-    container.appendChild(el);
-    let cursor = document.createElement('SPAN');
-    cursor.className = cursorClass;
-    cursor.innerHTML = '|';
-    container.appendChild(cursor);
-
-    stop();
-    return next();
+    let tw = new TW({containerId, extractClass, cursorClass});
+    return tw.stop().writeNext();
   };
 
   return {
-    start,
-    stop
+    start
   };
 
 });

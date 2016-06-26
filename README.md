@@ -13,13 +13,20 @@ Text typing effect - like [typed.js](https://github.com/mattboldt/typed.js/), bu
   <script type="text/javascript" src="https://cdn.rawgit.com/ndaidong/typewritter/master/dist/typewritter-effect.min.js"></script>
   ```
 
-- This library also supports ES6 Module, AMD and UMD style.
+- Also supports ES6 Module, AMD and UMD style.
 
 
 ## APIs
 
 * .start(Object config)
-* .stop()
+
+
+In which, config might have the following properties:
+
+- containerId:  ID of the container. Required.
+- extractClass:  Optional. If this property is specified, the engine will try to extract the sentences from all element which have that class name (within container).
+- cursorClass:  Optional. If you want to add more style to cursor (at the end of sentence), just specify this property and use CSS to decorate it.
+- sentences:  Optional. An array of the sentences.
 
 ## Usage
 

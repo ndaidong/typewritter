@@ -39,6 +39,7 @@
   "extends": "eslint:all",
 
   "rules": {
+    "consistent-this": 0,
     "arrow-body-style": 0,
     "dot-location": 0,
     "global-require": 0,
