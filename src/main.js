@@ -151,9 +151,8 @@
     }
   }
 
-  var start = ({containerId, extractClass, cursorClass}) => {
-
-    let tw = new TW({containerId, extractClass, cursorClass});
+  var start = ({containerId, extractClass, cursorClass, sentences}) => {
+    let tw = new TW({containerId, extractClass, cursorClass, sentences});
     return tw.stop().writeNext();
   };
 
